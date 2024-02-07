@@ -1,6 +1,7 @@
 package com.webank.wecross.console;
 
 import com.webank.wecross.console.custom.BCOSCommand;
+import com.webank.wecross.console.custom.ChainMakerCommand;
 import com.webank.wecross.console.custom.FabricCommand;
 import com.webank.wecross.console.exception.ErrorCode;
 import com.webank.wecross.console.exception.WeCrossConsoleException;
@@ -27,6 +28,7 @@ public class Initializer {
     private HTLCFace htlcFace;
     private BCOSCommand bcosCommand;
     private FabricCommand fabricCommand;
+    private ChainMakerCommand chainMakerCommand;
 
     public void init() throws WeCrossConsoleException {
         WeCrossRPCService weCrossRPCService = new WeCrossRPCService();
@@ -44,6 +46,7 @@ public class Initializer {
         xaFace.setWeCrossRPC(weCrossRPC);
         bcosCommand = new BCOSCommand(weCrossRPC);
         fabricCommand = new FabricCommand(weCrossRPC);
+        chainMakerCommand = new ChainMakerCommand(weCrossRPC);
     }
 
     public WeCrossRPC getWeCrossRPC() {
@@ -88,6 +91,10 @@ public class Initializer {
 
     public FabricCommand getFabricCommand() {
         return fabricCommand;
+    }
+
+    public ChainMakerCommand getChainMakerCommand() {
+        return chainMakerCommand;
     }
 
     public void setFabricCommand(FabricCommand fabricCommand) {

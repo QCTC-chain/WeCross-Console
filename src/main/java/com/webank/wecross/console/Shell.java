@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.webank.wecross.console.common.*;
 import com.webank.wecross.console.custom.BCOSCommand;
+import com.webank.wecross.console.custom.ChainMakerCommand;
 import com.webank.wecross.console.custom.FabricCommand;
 import com.webank.wecross.console.exception.ErrorCode;
 import com.webank.wecross.console.exception.WeCrossConsoleException;
@@ -31,6 +32,7 @@ public class Shell {
     private static XAFace xaFace;
     private static BCOSCommand bcosCommand;
     private static FabricCommand fabricCommand;
+    private static ChainMakerCommand chainMakerCommand;
     private static String loginUser;
     private static String runtimeTransaction;
 
@@ -53,6 +55,7 @@ public class Shell {
             xaFace = initializer.getXaFace();
             bcosCommand = initializer.getBcosCommand();
             fabricCommand = initializer.getFabricCommand();
+            chainMakerCommand = initializer.getChainMakerCommand();
         } catch (WeCrossConsoleException e) {
             System.out.println(e.getMessage());
             System.exit(0);
@@ -316,6 +319,11 @@ public class Shell {
                             if (params.length == 8) {
                                 JlineUtils.addOrgCompleters(completers, params[2]);
                             }
+                            break;
+                        }
+                    case "chainMakerDeploy":
+                        {
+                            chainMakerCommand.deploy(params);
                             break;
                         }
                     case "login":

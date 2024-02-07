@@ -26,6 +26,8 @@ WeCross Console是[WeCross](https://github.com/WeBankBlockchain/WeCross)的重�
 **编译命令**:
 
 ```bash
+# 由于更改过 wecross-java-sdk 源码，需要编译 wecross-java-skd 后将 dist/apps 和 dist/lib 目录下的 jar 包
+# 拷贝值当前工程 lib 目录下
 $ cd WeCross-Console
 $ ./gradlew assemble
 ```

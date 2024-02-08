@@ -460,7 +460,7 @@ public class HelpInfo {
 
     public static void ChainMakerDeployHelp() {
         ConsoleUtils.singleLine();
-        System.out.println("Deploy contract and register contract info in chainmaker");
+        System.out.println("Deploy contract in chainmaker");
         System.out.println("If you deploy Solidity contract:");
         System.out.println(
                 "\tUsage: chainMakerDeploy [Path] [Source file path] [Class name] [Version]");
@@ -471,7 +471,23 @@ public class HelpInfo {
         System.out.println("\tContract name -- The contract to be deploy");
         System.out.println("\tExample:");
         System.out.println(
-                "    \tchainMakerDeploy payment.chainmaker.HelloWorld contracts/solidity/HelloWorld.sol HelloWorld 1.0");
+                "    \tchainMakerDeploy payment.chainmaker.HelloWorld contracts/solidity/HelloWorld.bin HelloWorld 1.0");
+    }
+
+    public static void ChainMakerUpgradeHelp() {
+        ConsoleUtils.singleLine();
+        System.out.println("Upgrade contract in chainmaker");
+        System.out.println("If you upgrade Solidity contract:");
+        System.out.println(
+                "\tUsage: chainMakerUpgrade [Path] [Source file path] [Class name] [Version]");
+        System.out.println(
+                "\tPath -- e.g: [zone.chain.res], specify which the path to be deployed");
+        System.out.println(
+                "\tSource file path from conf/ -- The solidity source code file path, e.g: HelloWorld.sol");
+        System.out.println("\tContract name -- The contract to be deploy");
+        System.out.println("\tExample:");
+        System.out.println(
+                "    \tchainMakerUpgrade payment.chainmaker.HelloWorld contracts/solidity/HelloWorld.bin HelloWorld 1.0");
     }
 
     public static void checkTransferStatusHelp() {

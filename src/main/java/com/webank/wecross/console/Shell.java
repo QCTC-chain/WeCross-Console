@@ -326,6 +326,11 @@ public class Shell {
                             chainMakerCommand.deploy(params);
                             break;
                         }
+                    case "chainMakerUpgrade":
+                        {
+                            chainMakerCommand.upgrade(params);
+                            break;
+                        }
                     case "login":
                         {
                             rpcFace.login(params);

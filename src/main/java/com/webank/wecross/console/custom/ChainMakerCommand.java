@@ -28,23 +28,24 @@ public class ChainMakerCommand {
         this.weCrossRPC = weCrossRPC;
     }
 
-    /**
-     * deploy contract
-     *
-     * @params ChainMakerDeploy [path] [filePath] [className] [version]
-     */
-    public void deploy(String[] params) throws Exception {
+    private void deployContract(String[] params, boolean deploy) throws Exception {
         if (params.length == 1) {
-            throw new WeCrossConsoleException(ErrorCode.PARAM_MISSING, "chainMakerDeploy");
+            throw new WeCrossConsoleException(
+                    ErrorCode.PARAM_MISSING, deploy ? "chainMakerDeploy" : "ChainMakerUpgrade");
         }
 
         if ("-h".equals(params[1]) || "--help".equals(params[1])) {
-            HelpInfo.ChainMakerDeployHelp();
+            if (deploy) {
+                HelpInfo.ChainMakerDeployHelp();
+            } else {
+                HelpInfo.ChainMakerUpgradeHelp();
+            }
             return;
         }
 
         if (params.length < 4) {
-            throw new WeCrossConsoleException(ErrorCode.PARAM_MISSING, "chainMakerDeploy");
+            throw new WeCrossConsoleException(
+                    ErrorCode.PARAM_MISSING, deploy ? "chainMakerDeploy" : "ChainMakerUpgrade");
         }
 
         String path = params[1];
@@ -94,8 +95,26 @@ public class ChainMakerCommand {
 
         CommandResponse response =
                 weCrossRPC
-                        .customCommand("DEPLOY_CHAINMAEKER_CONTRACT", path, args.toArray())
+                        .customCommand(
+                                deploy
+                                        ? "DEPLOY_CHAINMAEKER_CONTRACT"
+                                        : "UPGRADE_CHAINMAEKER_CONTRACT",
+                                path,
+                                args.toArray())
                         .send();
         PrintUtils.printCommandResponse(response);
+    }
+
+    /**
+     * deploy contract
+     *
+     * @params ChainMakerDeploy [path] [filePath] [className] [version]
+     */
+    public void deploy(String[] params) throws Exception {
+        deployContract(params, true);
+    }
+
+    public void upgrade(String[] params) throws Exception {
+        deployContract(params, false);
     }
 }

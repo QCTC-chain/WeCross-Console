@@ -75,6 +75,7 @@ public class WelcomeInfo {
         sb.append("fabricInstantiate                Instantiate chaincode in fabric chain.\n");
         sb.append("fabricUpgrade                    Upgrade chaincode in fabric chain.\n");
         sb.append("chainMakerDeploy                 Deploy contract in chainmaker.\n");
+        sb.append("chainMakerUpgrade                Upgrade contract in chainmaker.\n");
 
         sb.append(
                 "\n------------------------------------------ Others -------------------------------------------\n");

@@ -1,11 +1,7 @@
 package com.webank.wecross.console.rpc;
 
 import com.moandjiezana.toml.Toml;
-import com.webank.wecross.console.common.ConsoleUtils;
-import com.webank.wecross.console.common.FileUtils;
-import com.webank.wecross.console.common.Hash;
-import com.webank.wecross.console.common.HelpInfo;
-import com.webank.wecross.console.common.PrintUtils;
+import com.webank.wecross.console.common.*;
 import com.webank.wecross.console.exception.ErrorCode;
 import com.webank.wecross.console.exception.WeCrossConsoleException;
 import com.webank.wecrosssdk.common.Constant;
@@ -13,11 +9,7 @@ import com.webank.wecrosssdk.common.StatusCode;
 import com.webank.wecrosssdk.rpc.WeCrossRPC;
 import com.webank.wecrosssdk.rpc.common.ResourceDetail;
 import com.webank.wecrosssdk.rpc.common.Resources;
-import com.webank.wecrosssdk.rpc.common.account.BCOSAccount;
-import com.webank.wecrosssdk.rpc.common.account.ChainAccount;
-import com.webank.wecrosssdk.rpc.common.account.ChainMakerCertAccount;
-import com.webank.wecrosssdk.rpc.common.account.FabricAccount;
-import com.webank.wecrosssdk.rpc.common.account.UniversalAccount;
+import com.webank.wecrosssdk.rpc.common.account.*;
 import com.webank.wecrosssdk.rpc.methods.response.*;
 import com.webank.wecrosssdk.utils.ConfigUtils;
 import java.io.Console;
@@ -445,6 +437,17 @@ public class RPCImpl implements RPCFace {
                                 userCert,
                                 userKey);
 
+                UAResponse uaResponse = weCrossRPC.addChainAccount(type, chainAccount).send();
+                PrintUtils.printUAResponse(uaResponse);
+            } else {
+                String userCertPath = params[4];
+                String userKeyPath = params[5];
+                boolean isDefault = checkBooleanString(params[6]);
+                String userCert = FileUtils.readFileContent(userCertPath);
+                String userKey = FileUtils.readFileContent(userKeyPath);
+
+                ChainAccount chainAccount =
+                        new ChainMakerPublicAccount(type, isDefault, orgId, userCert, userKey);
                 UAResponse uaResponse = weCrossRPC.addChainAccount(type, chainAccount).send();
                 PrintUtils.printUAResponse(uaResponse);
             }

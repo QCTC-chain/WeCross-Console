@@ -221,6 +221,10 @@ public class HelpInfo {
                 "    addChainAccount Fabric1.4 path/to/cert path/to/key membershipID true");
         System.out.println(
                 "    addChainAccount Fabric2.0 path/to/cert path/to/key membershipID true");
+        System.out.println(
+                "    addChainAccount chainmaker orgid permissionedWithCert path/to/sign.cert path/to/sign.key path/to/user.cert path/to/user.key false true");
+        System.out.println(
+                "    addChainAccount chainmaker orgid public path/to/user.cert path/to/user.key true");
         ConsoleUtils.singleLine();
     }
 

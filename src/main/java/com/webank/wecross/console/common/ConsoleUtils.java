@@ -24,7 +24,10 @@ public class ConsoleUtils {
     public static final String BCOSGMType3 = "BCOS3_GM_EVM";
     public static final String BCOSWASMType3 = "BCOS3_ECDSA_WASM";
     public static final String BCOSWASMGMType3 = "BCOS3_GM_WASM";
-    public static final String CHAINMAKERType = "chainmaker";
+    public static final String CHAINMAKERWithCertType = "ChainMakerWithCert";
+    public static final String CHAINMAKERGMWithCertType = "ChainMakerGMWithCert";
+    public static final String CHAINMAKERWithPublicType = "ChainMakerWithPublic";
+    public static final String CHAINMAKERGMWithPublicType = "ChainMakerGMWithPublic";
     public static final List<String> bcosChainList =
             Arrays.asList(
                     BCOSType, BCOSGMType, BCOSType3, BCOSGMType3, BCOSWASMType3, BCOSWASMGMType3);
@@ -38,7 +41,10 @@ public class ConsoleUtils {
                     BCOSGMType3,
                     BCOSWASMType3,
                     BCOSWASMGMType3,
-                    CHAINMAKERType);
+                    CHAINMAKERWithCertType,
+                    CHAINMAKERGMWithCertType,
+                    CHAINMAKERWithPublicType,
+                    CHAINMAKERGMWithPublicType);
     private static final Logger logger = LoggerFactory.getLogger(ConsoleUtils.class);
 
     public static boolean isValidPath(String path) {

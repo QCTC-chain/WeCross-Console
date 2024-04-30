@@ -409,48 +409,48 @@ public class RPCImpl implements RPCFace {
             PrintUtils.printUAResponse(uaResponse);
         }
 
-        if (params[1].equals(ConsoleUtils.CHAINMAKERType)) {
+        if (params[1].equals(ConsoleUtils.CHAINMAKERWithCertType)
+                || params[1].equals(ConsoleUtils.CHAINMAKERGMWithCertType)) {
             String type = params[1];
             String orgId = params[2];
-            String authType = params[3];
-            if (authType.equals("permissionedWithCert")) {
-                String userSignCertPath = params[4];
-                String userSignKeyPath = params[5];
-                String userCertPath = params[6];
-                String userKeyPath = params[7];
-                boolean pkcs11Enable = checkBooleanString(params[8]);
-                boolean isDefault = checkBooleanString(params[9]);
+            String userSignCertPath = params[3];
+            String userSignKeyPath = params[4];
+            String userCertPath = params[5];
+            String userKeyPath = params[6];
+            boolean pkcs11Enable = checkBooleanString(params[8]);
+            boolean isDefault = checkBooleanString(params[9]);
 
-                String userSignCert = FileUtils.readFileContent(userSignCertPath);
-                String userSignKey = FileUtils.readFileContent(userSignKeyPath);
-                String userCert = FileUtils.readFileContent(userCertPath);
-                String userKey = FileUtils.readFileContent(userKeyPath);
+            String userSignCert = FileUtils.readFileContent(userSignCertPath);
+            String userSignKey = FileUtils.readFileContent(userSignKeyPath);
+            String userCert = FileUtils.readFileContent(userCertPath);
+            String userKey = FileUtils.readFileContent(userKeyPath);
 
-                ChainAccount chainAccount =
-                        new ChainMakerCertAccount(
-                                type,
-                                isDefault,
-                                orgId,
-                                pkcs11Enable,
-                                userSignCert,
-                                userSignKey,
-                                userCert,
-                                userKey);
+            ChainAccount chainAccount =
+                    new ChainMakerCertAccount(
+                            type,
+                            isDefault,
+                            orgId,
+                            pkcs11Enable,
+                            userSignCert,
+                            userSignKey,
+                            userCert,
+                            userKey);
 
-                UAResponse uaResponse = weCrossRPC.addChainAccount(type, chainAccount).send();
-                PrintUtils.printUAResponse(uaResponse);
-            } else {
-                String userCertPath = params[4];
-                String userKeyPath = params[5];
-                boolean isDefault = checkBooleanString(params[6]);
-                String userCert = FileUtils.readFileContent(userCertPath);
-                String userKey = FileUtils.readFileContent(userKeyPath);
+            UAResponse uaResponse = weCrossRPC.addChainAccount(type, chainAccount).send();
+            PrintUtils.printUAResponse(uaResponse);
+        } else {
+            String type = params[1];
+            String orgId = params[2];
+            String userCertPath = params[3];
+            String userKeyPath = params[4];
+            boolean isDefault = checkBooleanString(params[6]);
+            String userCert = FileUtils.readFileContent(userCertPath);
+            String userKey = FileUtils.readFileContent(userKeyPath);
 
-                ChainAccount chainAccount =
-                        new ChainMakerPublicAccount(type, isDefault, orgId, userCert, userKey);
-                UAResponse uaResponse = weCrossRPC.addChainAccount(type, chainAccount).send();
-                PrintUtils.printUAResponse(uaResponse);
-            }
+            ChainAccount chainAccount =
+                    new ChainMakerPublicAccount(type, isDefault, orgId, userCert, userKey);
+            UAResponse uaResponse = weCrossRPC.addChainAccount(type, chainAccount).send();
+            PrintUtils.printUAResponse(uaResponse);
         }
     }
 

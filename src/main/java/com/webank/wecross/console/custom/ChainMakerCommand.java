@@ -80,12 +80,12 @@ public class ChainMakerCommand {
         }
 
         String filename = resource.getFilename();
-        String binFileName = filename.split("\\.")[0] + ".abi";
+        String abiFileName = filename.split("\\.")[0] + ".abi";
         String realPath = resource.getFile().getAbsolutePath();
         String dir = realPath.substring(0, realPath.lastIndexOf(File.separator)) + File.separator;
 
         String sourceContent = FileUtils.mergeSource(dir, filename, resolver, new HashSet<>());
-        String abiContent = FileUtils.readFileContent(dir + File.separator + binFileName);
+        String abiContent = FileUtils.readFileContent(dir + File.separator + abiFileName);
         String version = params[4];
         args.addAll(Arrays.asList(cnsName, sourceContent, abiContent, contractName, version));
         for (int i = 5; i < params.length; i++) {

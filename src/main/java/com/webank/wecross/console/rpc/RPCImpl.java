@@ -417,8 +417,8 @@ public class RPCImpl implements RPCFace {
             String userSignKeyPath = params[4];
             String userCertPath = params[5];
             String userKeyPath = params[6];
-            boolean pkcs11Enable = checkBooleanString(params[8]);
-            boolean isDefault = checkBooleanString(params[9]);
+            boolean pkcs11Enable = checkBooleanString(params[7]);
+            boolean isDefault = checkBooleanString(params[8]);
 
             String userSignCert = FileUtils.readFileContent(userSignCertPath);
             String userSignKey = FileUtils.readFileContent(userSignKeyPath);
@@ -443,7 +443,7 @@ public class RPCImpl implements RPCFace {
             String orgId = params[2];
             String userCertPath = params[3];
             String userKeyPath = params[4];
-            boolean isDefault = checkBooleanString(params[6]);
+            boolean isDefault = checkBooleanString(params[5]);
             String userCert = FileUtils.readFileContent(userCertPath);
             String userKey = FileUtils.readFileContent(userKeyPath);
 

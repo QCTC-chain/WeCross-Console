@@ -257,6 +257,38 @@ public class RPCImpl implements RPCFace {
         PrintUtils.printTransactionResponse(response, false);
     }
 
+    @Override
+    public void subscribeEvent(String[] params, Map<String, String> pathMaps) throws Exception {
+        if ("-h".equals(params[1]) || "--help".equals(params[1])) {
+            HelpInfo.subscribeEventHelp();
+            return;
+        }
+
+        if (params.length < 3) {
+            HelpInfo.subscribeEventHelp();
+            throw new WeCrossConsoleException(ErrorCode.PARAM_MISSING, "invoke");
+        }
+
+        String path = ConsoleUtils.parsePath(params, pathMaps);
+        if (path == null) {
+            throw new WeCrossConsoleException(
+                    ErrorCode.INVALID_PATH, "Error: path is invalid, please check again!");
+        }
+
+        List<String> topics = new ArrayList<>();
+        topics.add(params[2]);
+        long from = -1;
+        long to = -1;
+        if (params.length >= 4) {
+            from = Long.parseLong(params[3]);
+        }
+        if (params.length >= 5) {
+            to = Long.parseLong(params[4]);
+        }
+        SubscribeResponse response = weCrossRPC.subscribeEvent(path, from, to, topics).send();
+        PrintUtils.printSubscribeResponse(response);
+    }
+
     private UAResponse loginWithoutArgs(WeCrossRPC weCrossRPC) throws Exception {
         Toml toml = ConfigUtils.getToml(Constant.APPLICATION_CONFIG_FILE);
         String username = toml.getString("login.username");

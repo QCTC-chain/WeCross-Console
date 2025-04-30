@@ -188,6 +188,11 @@ public class Shell {
                             }
                             break;
                         }
+                    case "subscribeEvent":
+                        {
+                            rpcFace.subscribeEvent(params, pathMaps);
+                            break;
+                        }
                     case "genTimelock":
                         {
                             htlcFace.genTimelock(params);

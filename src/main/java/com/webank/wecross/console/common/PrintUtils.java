@@ -179,6 +179,24 @@ public class PrintUtils {
         }
     }
 
+    public static void printSubscribeResponse(SubscribeResponse response)
+            throws WeCrossConsoleException {
+        logger.debug("response: {}", response.getResult());
+        if (response == null) {
+            throw new WeCrossConsoleException(ErrorCode.NO_RESPONSE, "Error: no response");
+        } else if (response.getErrorCode() != StatusCode.SUCCESS) {
+            throw new WeCrossConsoleException(
+                    ErrorCode.INTERNAL_ERROR,
+                    "Error: code("
+                            + response.getErrorCode()
+                            + "), message("
+                            + response.getMessage()
+                            + ")");
+        } else {
+            System.out.println("Result: " + response.getResult());
+        }
+    }
+
     public static void printUAResponse(UAResponse response) throws WeCrossConsoleException {
         if (response == null) {
             throw new WeCrossConsoleException(ErrorCode.NO_RESPONSE, "Error: no response");

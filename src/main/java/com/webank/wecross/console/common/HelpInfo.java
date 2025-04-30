@@ -150,6 +150,18 @@ public class HelpInfo {
         ConsoleUtils.singleLine();
     }
 
+    public static void subscribeEventHelp() {
+        ConsoleUtils.singleLine();
+        System.out.println(
+                "Add a listener to replay contract events emitted by committed transactions");
+        System.out.println("Usage: subscribeEvent [path] [topic] [from] [to]");
+        System.out.println("path -- the path of the contract resource in wecross router");
+        System.out.println("topic -- the name of the event in contract");
+        System.out.println("from -- The number of the block from which events should be replayed");
+        System.out.println("end -- The number of the block end which events should be replayed");
+        ConsoleUtils.singleLine();
+    }
+
     public static void newProposalHelp() {
         ConsoleUtils.singleLine();
         System.out.println("Create a htlc transfer proposal");

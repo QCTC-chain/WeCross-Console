@@ -23,6 +23,8 @@ public interface RPCFace {
 
     void invoke(String[] params, Map<String, String> pathMaps) throws Exception;
 
+    void subscribeEvent(String[] params, Map<String, String> pathMaps) throws Exception;
+
     void login(String[] params) throws Exception;
 
     void internalLogin() throws Exception;

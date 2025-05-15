@@ -483,7 +483,9 @@ public class HelpInfo {
         System.out.println("Deploy contract in chainmaker");
         System.out.println("If you deploy Solidity contract:");
         System.out.println(
-                "\tUsage: chainMakerDeploy [Path] [Source file path] [Class name] [Version]");
+                "\tUsage: chainMakerDeploy [type] [Path] [Source file path] [Class name] [Version]");
+        System.out.println(
+                "\ttype -- e.g: [EVM or DOCKER_GO], specify which the path to be deployed");
         System.out.println(
                 "\tPath -- e.g: [zone.chain.res], specify which the path to be deployed");
         System.out.println(
@@ -491,7 +493,9 @@ public class HelpInfo {
         System.out.println("\tContract name -- The contract to be deploy");
         System.out.println("\tExample:");
         System.out.println(
-                "    \tchainMakerDeploy payment.chainmaker.HelloWorld contracts/solidity/HelloWorld.bin HelloWorld 1.0");
+                "    \tchainMakerDeploy EVM payment.chainmaker.HelloWorld contracts/solidity/HelloWorld.bin HelloWorld 1.0");
+        System.out.println(
+                "    \tchainMakerDeploy DOCKER_GO payment.chainmaker.HelloWorld contracts/go/sharedata.7z sharedata 1.0");
     }
 
     public static void ChainMakerUpgradeHelp() {

@@ -43,12 +43,12 @@ public class ChainMakerCommand {
             return;
         }
 
-        if (params.length < 4) {
+        if (params.length < 5) {
             throw new WeCrossConsoleException(
                     ErrorCode.PARAM_MISSING, deploy ? "chainMakerDeploy" : "ChainMakerUpgrade");
         }
-
-        String path = params[1];
+        String type = params[1];
+        String path = params[2];
         String chain = path.substring(0, path.lastIndexOf('.') + 1);
         RPCUtils.checkPath(path);
         String stubType = "";
@@ -66,9 +66,8 @@ public class ChainMakerCommand {
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         List<Object> args = new ArrayList<>();
 
-        String cnsName = path.split("\\.")[2];
-        String sourcePath = params[2];
-        String contractName = params[3];
+        String sourcePath = params[3];
+        String contractName = params[4];
 
         org.springframework.core.io.Resource resource = resolver.getResource("file:" + sourcePath);
         if (!resource.exists()) {
@@ -86,9 +85,9 @@ public class ChainMakerCommand {
 
         String sourceContent = FileUtils.mergeSource(dir, filename, resolver, new HashSet<>());
         String abiContent = FileUtils.readFileContent(dir + File.separator + abiFileName);
-        String version = params[4];
-        args.addAll(Arrays.asList(cnsName, sourceContent, abiContent, contractName, version));
-        for (int i = 5; i < params.length; i++) {
+        String version = params[5];
+        args.addAll(Arrays.asList(type, sourceContent, abiContent, contractName, version));
+        for (int i = 6; i < params.length; i++) {
             // for constructor
             args.add(ConsoleUtils.parseString(params[i]));
         }

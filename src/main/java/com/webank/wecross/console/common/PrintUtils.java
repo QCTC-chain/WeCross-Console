@@ -221,6 +221,7 @@ public class PrintUtils {
             System.out.println("Result: " + response.getUAReceipt().getMessage());
             if (response.getUAReceipt().getUniversalAccount() != null) {
                 ConsoleUtils.doubleLine();
+                System.out.println("credential: " + response.getUAReceipt().getCredential());
                 System.out.println(response.getUAReceipt().getUniversalAccount().toFormatString());
             }
         }

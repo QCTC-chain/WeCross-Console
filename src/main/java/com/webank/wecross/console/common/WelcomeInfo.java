@@ -43,6 +43,7 @@ public class WelcomeInfo {
         sb.append(
                 "WeCross.getResource              Init resource by path, and assign it to a custom variable.\n");
         sb.append("[resource].[command]             Equal to: command [path].\n");
+        sb.append("subscribeEvent                    Subscribe resources event.\n");
 
         sb.append(
                 "\n---------------------------------------- XA Routine -----------------------------------------\n");

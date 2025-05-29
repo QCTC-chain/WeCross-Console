@@ -51,17 +51,17 @@ public class ChainMakerCommand {
         String path = params[2];
         String chain = path.substring(0, path.lastIndexOf('.') + 1);
         RPCUtils.checkPath(path);
-        String stubType = "";
+        // String stubType = "";
         ResourceResponse resources = weCrossRPC.listResources(false).send();
         for (ResourceDetail resourceDetail : resources.getResources().getResourceDetails()) {
             if (resourceDetail.getPath().startsWith(chain)) {
-                stubType = resourceDetail.getStubType();
+                // stubType = resourceDetail.getStubType();
                 break;
             }
         }
-        if (stubType.equals("")) {
-            throw new WeCrossConsoleException(ErrorCode.INVALID_PATH, path);
-        }
+        // if (stubType.equals("")) {
+        //    throw new WeCrossConsoleException(ErrorCode.INVALID_PATH, path);
+        // }
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         List<Object> args = new ArrayList<>();
